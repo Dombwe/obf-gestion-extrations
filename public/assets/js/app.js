@@ -5,3 +5,6 @@ import '../../../assets/styles/app.css';
 
 // start the Stimulus application
 import '../../../assets/bootstrap.js';
+
+
+console.log("Test webpack");

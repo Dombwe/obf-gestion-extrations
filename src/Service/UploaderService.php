@@ -11,6 +11,7 @@ class UploaderService
     // On va lui passer un objet de type UploadedFile
     // Et elle doit nous retourner le nom de ce file
     public function __construct(private SluggerInterface $slugger) {}
+    
     public function uploadFile(
         UploadedFile $file,
         string $directoryFolder
@@ -18,9 +19,10 @@ class UploaderService
         $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
         // this is needed to safely include the file name as part of the URL
         $safeFilename = $this->slugger->slug($originalFilename);
-        $newFilename = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
+        // $newFilename = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
+        $newFilename = $safeFilename.'.'.$file->guessExtension();
 
-        // Move the file to the directory where brochures are stored
+        // Move the file to the directory where files are stored
         try {
             $file->move(
                 $directoryFolder,
@@ -29,6 +31,19 @@ class UploaderService
         } catch (FileException $e) {
             // ... handle exception if something happens during file upload
         }
+        return $newFilename;
+    }
+
+
+    public function getFileName(
+        UploadedFile $file,
+    ) {
+        $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        // this is needed to safely include the file name as part of the URL
+        $safeFilename = $this->slugger->slug($originalFilename);
+        // $newFilename = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
+        $newFilename = $safeFilename.'.'.$file->guessExtension();
+        // return file name
         return $newFilename;
     }
 }

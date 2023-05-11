@@ -6,20 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>
         {% block title %}
-            Static Navigation - SB Admin
+           Gestion des extractions OBF
         {% endblock %}
     </title>
     <link rel="icon" type="image/jpg" href="{{ asset('assets/favicon.png') }}" />
     <link href="{{ asset('assets/css/styles.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/loader-style.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/stylestable.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/simple-datatable.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/upload-file.css') }}" rel="stylesheet" />
     <link href="{{ asset('node_modules/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('node_modules/@fortawesome/fontawesome-free/css/all.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('node_modules/select2/dist/css/select2.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('node_modules/sweetalert2/dist/sweetalert2.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/progressbar-style.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/simple-datatable.css') }}" rel="stylesheet" />
 
     {{ encore_entry_link_tags('app') }}
     {% block stylesheets %}
@@ -32,52 +35,20 @@
 {# <body style="background:url({{asset('assets/images/body-background.png')}});"> #}
 <body>
 
-{# <nav class="sb-topnav navbar navbar-expand " style="background:black;">
-    <!-- Navbar Brand-->
-    <a  href="{{ path('dashboard') }}" >
-        <img class="navbar-brand ps-3" style="background:white;" src="{{ asset('assets/images/logo_obf.png')}}" alt="">
-    </a>
-
-    <!-- Sidebar Toggle-->
-    <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars" style="color:white;"></i></button>
-    
-    <div class="nav-item ms-auto me-0 me-md-3 my-2 my-md-0" style="font-family: 'Times New Roman';font-size:15px;font-weight:bold;color:white;">
-        {% if app.user %} {{ app.user.email }} {% else %} Anonymous {% endif %}</i>
-    </div>
-
-    <!-- Navbar-->
-    <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" style="color:greenyellow;" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i style="font-size:large;color:greenyellow;" class="fas fa-user"></i></a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li>
-                    <div class="row" style="margin-left: 2%;">
-                        <div class="col-md-8">
-                            <a style="padding:0;" class="dropdown-item" href="#">Deconnexion</a>
-                        </div>
-                        <div class="col-md-2">
-                            <i style="color:red;" class="fa fa-power-off" aria-hidden="true"> </i>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </li>
-    </ul>
-</nav> #}
 
 <div id="layoutSidenav" style="width:100%;height:100%;position:absolute;overflow-y:false;">
-        <div id="layoutSidenav_nav" style="">
-            <nav class="sb-sidenav accordion card" id="sidenavAccordion" style="border:1px solid black;background-repeat:no;background:url({{asset('assets/images/sidebar.png')}});">
-                <div class="sb-sidenav-menu" > 
+        <div id="layoutSidenav_nav card shadow-lg p-3 mb-5 bg-black rounded" style="">
+            <nav class="sb-sidenav accordion " id="sidenavAccordion" style="border:0.5px solid black;background-repeat:no;background:url({{asset('assets/images/sidebar.png')}});">
+                <div class="sb-sidenav-menu" >
                     <!-- Navbar Brand-->
-                    <a  href="{{ path('dashboard') }}">
-                        <img class="navbar-brand card" style="border-right:px solid black;background:white;width:100%;padding:2px;" src="{{ asset('assets/images/logo_obf.png')}}" alt="">
-                    </a>            
+                    <a  href="{{ path('fichiers') }}">
+                        <img class="navbar-brand " style="border-bottom:0.5px solid black;background:white;width:100%;padding:2px;" src="{{ asset('assets/images/logo_obf.png')}}" alt="">
+                    </a>
 
                     {# <hr style="margin:0;padding:0;color:white;"> #}
-                    <h6 style="color:white;font-weight:normal;text-align:center;">Gestion des extractions</h6>
-                    <hr style="margin:0;padding:0;color:white;">
-                    
+                    <h6 style="margin-top:0px;background:url({{asset('assets/images/body-background.png')}});font-weight:normal;text-align:center;">Gestion des extractions</h6>
+                    {# <hr style="margin:0;padding:0;color:white;"> #}
+
                     <div class="nav">
 
                         {# Onglet1 #}
@@ -86,56 +57,34 @@
                             MONETIQUE
                             <div class="sb-sidenav-collapse-arrow"><i style="color:white;" class="fas fa-angle-down"></i></div>
                         </a>
-                        <div class="collapse" style="background:#f5f5f5;color:white;" id="onglet1" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <div class="collapse" style="font-size:10px;background:url({{asset('assets/images/body-background.png')}});color:white;" id="onglet1" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav" >
-
-                                {# <hr style="margin:0;padding:0;color:black;">
-                                <a class="nav-link collapsed" style="color:black;" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                    <div class="sb-nav-link-icon" ><i style="color:black;" class="fas fa-address-card"> Demandes</i></div>
-                                    <div class="sb-sidenav-collapse-arrow"><i style="color:black;" class="fas fa-angle-down"></i></div>
-                                </a>
-
-                                <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="" style="background:#696969;margin-left:-50%;">
-                                    <nav class="sb-sidenav-menu-nested nav" style="margin-left:40%;color:white;">
-                                        <a class="nav-link" style="color:white;" href="#">
-                                            <i style="color:white;" class="fas fa-calendar-check"> Recrutements</i>
-                                        </a>
-                                        <hr style="margin:0;padding:0;color:black;">
-                                        <a class="nav-link" style="color:white;" href="#">
-                                            <i style="color:white;" class="fas fa-calendar-plus"> Renouvellements</i>
-                                        </a>
-                                        <hr style="margin:0;padding:0;color:black;">
-                                        <a class="nav-link" style="color:white;" href="#">
-                                            <i style="color:white;" class="fas fa-calendar-times"> Ruptures</i>
-                                        </a>
-                                    </nav>
-                                </div> #}
-
                                 <hr style="margin:0;padding:0;color:black;">
-                                <a class="nav-link" href="{{ path('dashboard') }}" style="color:black;">
-                                    <div class="sb-nav-link-icon"><i class="fas fa-upload" style="color:black;"> Chargements..</i></div>
+                                <a class="nav-link" href="{{ path('fichiers') }}" style="color:black;">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-upload" style="color:black;"></i> Chargements..</div>
                                 </a>
 
                                 <hr style="margin:0;padding:0;color:black;">
-                                <a class="nav-link" href="{{ path('dashboard') }}" style="color:black;">
-                                    <div class="sb-nav-link-icon"><i class="fas fa-folder" style="color:black;"> Extractions</i></div>
+                                <a class="nav-link" href="{{ path('fichiers') }}" style="color:black;">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-folder" style="color:black;"></i> Extractions</div>
                                 </a>
                             </nav>
                         </div>
-                        
+
                         <hr style="margin:0;padding:0;color:white;">
 
                     </div>
                 </div>
             </nav>
         </div>
-        {# style="background:url({{asset('assets/images/body-background.png')}});" #}
+
 
     <div id="layoutSidenav_content" >
         <main  style="
-                background:url({{asset('assets/images/body-background.png')}});
-                background-repeat: no-repeat;background-size: 100% 100%;
-                padding-top:2%;width:100%;height:100%;position:absolute;overflow-y:auto;">
+                    background:url({{asset('assets/images/body-background.png')}});
+                    background-repeat: no-repeat;background-size: 100% 100%;
+                    padding-top:2%;width:100%;height:100%;position:absolute;overflow-y:auto;
+               ">
             <div class="container-fluid px-4">
                 <h1 class="mt-4">
                     {% block pageTitle %}
@@ -175,17 +124,26 @@
 </div>
 
 
+
+<div class="loader">
+    <h1 style="color:white; marggin-right:3%;">Veuillez Patientez.. </h1> 
+    <h1 style="color:#000000;">.</h1> 
+</div>
+
+
+
 <script src="{{ asset('assets/js/scripts.js') }}"></script>
 <script src="{{ asset('node_modules/jquery/dist/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/js/datatables-simple-demo.js') }}"></script>
 <script src="{{ asset('node_modules/axios/dist/axios.min.js') }}"></script>
 <script src="{{ asset('node_modules/select2/dist/js/select2.min.js')}}"></script>
 <script src="{{ asset('node_modules/sweetalert2/dist/sweetalert2.min.js')}}"></script>
 <link href="{{ asset('node_modules/@fortawesome/fontawesome-free/js/all.min.js') }}" rel="stylesheet"/>
 <script src="{{ asset('node_modules/bootstrap/dist/js/bootstrap.bundle.min.js') }}" crossorigin="anonymous"></script>
-
-{# <script src="{{ asset('assets/js/upload-file.js') }}"></script> #}
+<script src="{{ asset('assets/js/loader-script.js') }}"></script>
+<script src="{{ asset('assets/js/upload-file.js') }}"></script>
 <script src="{{ asset('assets/js/simple-datatable.js') }}" crossorigin="anonymous"></script>
-<script src="{{ asset('assets/js/datatables-simple-demo.js') }}"></script>
+<script src="{{ asset('assets/js/script/fichier.js') }}"></script>
 
 
 {{ encore_entry_script_tags('app') }}
@@ -196,4 +154,4 @@
 
 {#{% else %}#}
 {#{% do redirect('app_login') %}#}
-{#{% endi
+{#{% endif %}#}

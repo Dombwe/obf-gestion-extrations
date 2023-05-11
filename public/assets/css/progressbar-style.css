@@ -1,0 +1,61 @@
+.progressBarContainer{
+    width: 440px;
+    height: 170px;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin: auto;
+    background-color: rgb(215, 215, 215);
+    border: 1px solid black;
+    padding: 30px 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+/* form{
+    display: none;
+} */
+
+.component{
+    display: none;
+}
+
+/* button{
+    background-color: rgba(24, 21, 21, 0.664);
+    border: 0px;
+    width: 130px;
+    padding: 10px 40px;
+    border-radius: 3px;
+    color: rgb(215, 215, 215);
+    cursor: pointer;
+} */
+
+.progress{
+    background-color: white;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 20px;
+    border: 1px solid black;
+    padding: 0px;
+}
+
+.progress-bar{
+    width: 0%;
+    background-color: greenyellow;
+    height: 100%;
+    /**border-radius: 3px;*/
+}
+
+.span{
+    width: 130px;
+    line-height: 35px;
+    border-radius: 3px;
+    position: relative;
+    top: 1px;
+    text-align: center;
+    display: inline-block;
+    background-color: rgba(24, 21, 21, 0.664);
+    color: greenyellow;
+}

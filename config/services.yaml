@@ -4,6 +4,15 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    
+    MONETIQUE_LOADING_DIRECTORY: '%kernel.project_dir%/public/uploads/monetique/chargements'
+    MONETIQUE_EXTRACTION_DIRECTORY: '%kernel.project_dir%/public/uploads/monetique/extractions'
+    MONETIQUE_SQL_EXTRACTION: 'select a.CODE AS CODE , a.cli AS CLIENT,a.EMBOS AS NOM_CLIENT,a.ncp AS COMPTE,a.age AS AGENCE,a.dsai AS DATE_SAISIE,a.cuti AS IdentifiantAgentSaisie, b.lib AS "NOM AGENT DE SAISIE" from spprecarte a, evuti b where a.cuti=b.cuti and a.dsai between'
+    MONETIQUE_SQL_EXTRACTION_CONDITION: 'and ncp in'
+
+    DB_NAME: '%env(DB_NAME)%'
+    DB_USER: '%env(DB_USER)%'
+    DB_PASS: '%env(DB_PASS)%'
 
 services:
     # default configuration for services in *this* file
